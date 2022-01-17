@@ -100,46 +100,50 @@ $this->title = $lesson->name;
                         </video>
                     </div>
                     <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
-                        <h5 class="mb-2">Тестті өту уақыты: <?= $lesson->testList[0]->duration ?> минут</h5>
-                        <h5 class="mb-2">Тестті өту баллы: <?= $lesson->testList[0]->min_score ?>% </h5>
-                        <div class="d-flex justify-content-center row">
-                            <div class="col-12">
-                                <?php if (count($tests) > 0) { ?>
-                                    <div class="border">
-                                        <div class="question bg-white p-3 border-bottom">
-                                            <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                                                <h4>Квиз сұрақтары</h4><span>(1 / <?= count($tests) ?>)</span>
-                                            </div>
-                                        </div>
-                                        <?php $form = ActiveForm::begin(['action' =>['test/result']]); ?>
-                                            <?php foreach ($tests as $test) { ?>
-                                                <input type="hidden" name="test_id" value="<?=$test->test_id?>">
-                                                <div class="question bg-white p-3 border-bottom">
-                                                    <div class="d-flex flex-row align-items-center question-title mb-3">
-                                                        <h3 class="text-danger">С.</h3>
-                                                        <h5 class="mt-1 ml-2"><?= $test->text ?>?</h5>
-                                                    </div>
-                                                    <?php if (count($test->answers) > 0) ?>
-                                                        <?php foreach ($test->answers as $answer) { ?>
-                                                            <div class="ans ml-2">
-                                                                <label class="radio">
-                                                                    <input type="radio" name="result[<?=$test->id?>]" value="<?= $answer->id ?>">
-                                                                    <span><?= $answer->text ?></span>
-                                                                </label>
-                                                            </div>
-                                                        <?php }  ?>
+                        <?php if (count($lesson->testList) > 0) { ?>
+                            <h5 class="mb-2">Тестті өту уақыты: <?= $lesson->testList[0]->duration ?> минут</h5>
+                            <h5 class="mb-2">Тестті өту баллы: <?= $lesson->testList[0]->min_score ?>% </h5>
+                            <div class="d-flex justify-content-center row">
+                                <div class="col-12">
+                                    <?php if (count($tests) > 0) { ?>
+                                        <div class="border">
+                                            <div class="question bg-white p-3 border-bottom">
+                                                <div class="d-flex flex-row justify-content-between align-items-center mcq">
+                                                    <h4>Квиз сұрақтары</h4><span>(1 / <?= count($tests) ?>)</span>
                                                 </div>
-                                            <?php } ?>
-                                            <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
-                                                <button class="btn btn-primary border-success align-items-center btn-success"
-                                                        type="submit">Аяқтау
-                                                </button>
                                             </div>
-                                        <?php ActiveForm::end(); ?>
-                                    </div>
-                                <?php } ?>
+                                            <?php $form = ActiveForm::begin(['action' =>['test/result']]); ?>
+                                                <?php foreach ($tests as $test) { ?>
+                                                    <input type="hidden" name="test_id" value="<?=$test->test_id?>">
+                                                    <div class="question bg-white p-3 border-bottom">
+                                                        <div class="d-flex flex-row align-items-center question-title mb-3">
+                                                            <h3 class="text-danger">С.</h3>
+                                                            <h5 class="mt-1 ml-2"><?= $test->text ?>?</h5>
+                                                        </div>
+                                                        <?php if (count($test->answers) > 0) ?>
+                                                            <?php foreach ($test->answers as $answer) { ?>
+                                                                <div class="ans ml-2">
+                                                                    <label class="radio">
+                                                                        <input type="radio" name="result[<?=$test->id?>]" value="<?= $answer->id ?>">
+                                                                        <span><?= $answer->text ?></span>
+                                                                    </label>
+                                                                </div>
+                                                            <?php }  ?>
+                                                    </div>
+                                                <?php } ?>
+                                                <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                                                    <button class="btn btn-primary border-success align-items-center btn-success"
+                                                            type="submit">Аяқтау
+                                                    </button>
+                                                </div>
+                                            <?php ActiveForm::end(); ?>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
-                        </div>
+                        <?php } else {?>
+                            <i>Әзірше квиз жүктелмеген... </i>
+                        <?php } ?>
                     </div>
                     <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
                         <?php if (count($lesson->fileList) > 0) { ?>

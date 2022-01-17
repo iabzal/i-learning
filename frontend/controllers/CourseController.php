@@ -96,6 +96,7 @@ class CourseController extends Controller
     public function actionShowLesson(int $id)
     {
         $lesson = Section::find()->byId($id)->one();
+        $testQuestions = [];
         if (count($lesson->testList) > 0) {
             $testId = $lesson->testList[0]->id;
             $testQuestions = TestQuestions::find()->byTestId($testId)->all();

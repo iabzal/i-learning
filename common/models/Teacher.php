@@ -38,7 +38,8 @@ class Teacher extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tmpImage', 'name', 'position', 'email', 'created_at', 'updated_at'], 'required'],
+            [['name', 'position', 'email', 'created_at', 'updated_at'], 'required'],
+            [['tmpImage'], 'required', 'on' => 'create'],
             [['image'], 'string'],
             [['tmpImage'], 'file', 'extensions' => ['png', 'jpg', 'jpeg', 'gif'], 'maxSize' => 1024 * 1024 * 2],
             [['tmpImage'], 'required', 'on' => 'create', 'message' => 'Необходимо загрузить «Сурет».'],

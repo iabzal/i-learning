@@ -37,7 +37,8 @@ class Review extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tmpImage', 'name', 'text', 'created_at', 'updated_at'], 'required'],
+            [['name', 'text', 'created_at', 'updated_at'], 'required'],
+            [['tmpImage'], 'required', 'on' => 'create'],
             [['image'], 'string'],
             [['tmpImage'], 'file', 'extensions' => ['png', 'jpg', 'jpeg', 'gif'], 'maxSize' => 1024 * 1024 * 2],
             [['tmpImage'], 'required', 'on' => 'create', 'message' => 'Необходимо загрузить «Изображение».'],            [['created_at', 'updated_at'], 'integer'],
