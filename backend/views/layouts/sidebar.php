@@ -17,6 +17,8 @@
                     ['label' => Yii::t('app', 'Сабақтар'), 'icon' => 'book-open', 'url' => ['/section']],
                     ['label' => Yii::t('app','Квиздер'), 'icon' => 'file','url' => ['/test']],
                     ['label' => Yii::t('app','Оқу-әдістеме'), 'icon' => 'file-pdf','url' => ['/section-file']],
+                    ['label' => Yii::t('app','Сөздік'), 'icon' => 'language','url' => ['/section-dictionary']],
+                    ['label' => Yii::t('app','Практикалық жұмыс'), 'icon' => 'tasks','url' => ['/section-practical-work']],
                     ['label' => Yii::t('app', 'Мұғалімдер'), 'icon' => 'users', 'url' => ['/teacher']],
                     ['label' => Yii::t('app', 'Мәтіндер'), 'icon' => 'file-alt', 'url' => ['/info']],
                     ['label' => Yii::t('app', 'Пікірлер'), 'icon' => 'comment', 'url' => ['/review']],

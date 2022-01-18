@@ -4,6 +4,7 @@ namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%tests}}".
@@ -100,5 +101,13 @@ class Tests extends \yii\db\ActiveRecord
     public function getSection()
     {
         return $this->hasOne(Section::class, ['id' => 'section_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getSectionForDepdrop()
+    {
+        return ArrayHelper::map(Section::find()->all(), 'id', 'name');
     }
 }

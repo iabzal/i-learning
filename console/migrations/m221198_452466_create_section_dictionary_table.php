@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%section}}`.
  */
-class m210718_112475_create_section_file_table extends Migration
+class m221198_452466_create_section_dictionary_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class m210718_112475_create_section_file_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%section_file}}', [
+        $this->createTable('{{%section_dictionary}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
             'course_id' => $this->integer()->notNull(),
@@ -31,13 +31,13 @@ class m210718_112475_create_section_file_table extends Migration
         ], $tableOptions);
 
         $this->createIndex(
-            'idx-files-course_id',
-            'section_file',
+            'idx-section_dictionary-course_id',
+            'section_dictionary',
             'course_id'
         );
         $this->addForeignKey(
-            'fk-files-course_id',
-            'section_file',
+            'fk-section_dictionary-course_id',
+            'section_dictionary',
             'course_id',
             'course',
             'id',
@@ -45,13 +45,13 @@ class m210718_112475_create_section_file_table extends Migration
         );
 
         $this->createIndex(
-            'idx-files-section_id',
-            'section_file',
+            'idx-section_dictionary-section_id',
+            'section_dictionary',
             'section_id'
         );
         $this->addForeignKey(
-            'fk-files-section_id',
-            'section_file',
+            'fk-section_dictionary-section_id',
+            'section_dictionary',
             'section_id',
             'section',
             'id',
@@ -64,6 +64,6 @@ class m210718_112475_create_section_file_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%section_file}}');
+        $this->dropTable('{{%section_dictionary}}');
     }
 }

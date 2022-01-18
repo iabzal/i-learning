@@ -26,6 +26,8 @@ use yii\web\UploadedFile;
  * @property string $filePath
  * @property string $videoUrl
  * @property SectionFile[] $fileList
+ * @property SectionDictionary[] $dictionaryList
+ * @property SectionPracticalWork[] $pWorkList
  * @property Tests[] $testList
  *
  * @property Course $course
@@ -136,6 +138,22 @@ class Section extends \yii\db\ActiveRecord
     public function getFileList()
     {
         return $this->hasMany(SectionFile::className(), ['section_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDictionaryList()
+    {
+        return $this->hasMany(SectionDictionary::className(), ['section_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPWorkList()
+    {
+        return $this->hasMany(SectionPracticalWork::className(), ['section_id' => 'id']);
     }
 
     /**

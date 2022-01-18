@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%section}}`.
  */
-class m210718_112475_create_section_file_table extends Migration
+class m231456_874596_create_section_practical_work_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -17,11 +17,12 @@ class m210718_112475_create_section_file_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%section_file}}', [
+        $this->createTable('{{%section_practical_work}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
             'course_id' => $this->integer()->notNull(),
             'section_id' => $this->integer()->notNull(),
+            'link' => $this->string(),
             'file_name' => $this->string(),
             'file_mime_type' => $this->string(),
             'file_ext' => $this->string(),
@@ -31,13 +32,13 @@ class m210718_112475_create_section_file_table extends Migration
         ], $tableOptions);
 
         $this->createIndex(
-            'idx-files-course_id',
-            'section_file',
+            'idx-section_practical_work-course_id',
+            'section_practical_work',
             'course_id'
         );
         $this->addForeignKey(
-            'fk-files-course_id',
-            'section_file',
+            'fk-section_practical_work-course_id',
+            'section_practical_work',
             'course_id',
             'course',
             'id',
@@ -45,13 +46,13 @@ class m210718_112475_create_section_file_table extends Migration
         );
 
         $this->createIndex(
-            'idx-files-section_id',
-            'section_file',
+            'idx-section_practical_work-section_id',
+            'section_practical_work',
             'section_id'
         );
         $this->addForeignKey(
-            'fk-files-section_id',
-            'section_file',
+            'fk-section_practical_work-section_id',
+            'section_practical_work',
             'section_id',
             'section',
             'id',
@@ -64,6 +65,6 @@ class m210718_112475_create_section_file_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%section_file}}');
+        $this->dropTable('{{%section_practical_work}}');
     }
 }

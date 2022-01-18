@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 
 /**
- * This is the model class for table "section_file".
+ * This is the model class for table "section_dictionary".
  *
  * @property int $id
  * @property string $name
@@ -19,10 +19,12 @@ use yii\web\UploadedFile;
  * @property int|null $file_size
  * @property int $created_at
  * @property int $updated_at
- * @property UploadedFile $file
  * @property string $fileUrl
+ *
+ * @property Course $course
+ * @property Section $section
  */
-class SectionFile extends \yii\db\ActiveRecord
+class SectionDictionary extends \yii\db\ActiveRecord
 {
     public $file;
 
@@ -31,7 +33,7 @@ class SectionFile extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'section_file';
+        return 'section_dictionary';
     }
 
     /**
@@ -43,6 +45,8 @@ class SectionFile extends \yii\db\ActiveRecord
             [['name', 'course_id', 'section_id', 'created_at', 'updated_at'], 'required'],
             [['course_id', 'section_id', 'file_size', 'created_at', 'updated_at'], 'integer'],
             [['name', 'file_name', 'file_mime_type', 'file_ext'], 'string', 'max' => 255],
+            [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => Course::className(), 'targetAttribute' => ['course_id' => 'id']],
+            [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],
         ];
     }
 
@@ -67,19 +71,23 @@ class SectionFile extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Course]].
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getCourse()
     {
-        return $this->hasOne(Course::class, ['id' => 'course_id']);
+        return $this->hasOne(Course::className(), ['id' => 'course_id']);
     }
 
     /**
+     * Gets query for [[Section]].
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getSection()
     {
-        return $this->hasOne(Section::class, ['id' => 'section_id']);
+        return $this->hasOne(Section::className(), ['id' => 'section_id']);
     }
 
     /**
@@ -101,7 +109,7 @@ class SectionFile extends \yii\db\ActiveRecord
         try {
             $success = false;
             if ($file !== null) {
-                $saveDir = Yii::getAlias('@frontend/web/uploads/section_file/');
+                $saveDir = Yii::getAlias('@frontend/web/uploads/section_dictionary/');
                 if (!file_exists($saveDir)) {
                     mkdir($saveDir, 0775, true);
                 }
@@ -148,11 +156,11 @@ class SectionFile extends \yii\db\ActiveRecord
 
     public function getFilePath()
     {
-        return Yii::getAlias('@frontend/web/uploads/section_file/') . $this->file_name;
+        return Yii::getAlias('@frontend/web/uploads/section_dictionary/') . $this->file_name;
     }
 
     public function getFileUrl()
     {
-        return '/uploads/section_file/' . $this->file_name;
+        return '/uploads/section_dictionary/' . $this->file_name;
     }
 }

@@ -201,6 +201,7 @@ $this->registerJs($js);
         ['prompt' => 'Пәнді таңдаңыз','id' => 'course-id']) ?>
 
     <?= $form->field($model, 'section_id')->widget(DepDrop::class, [
+        'data' => $model->getSectionForDepdrop(),
         'options'=>['id'=>'section-id'],
         'pluginOptions'=>[
             'depends'=>['course-id'],
