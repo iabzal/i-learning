@@ -24,6 +24,7 @@ use yii\widgets\ActiveForm;
                 ['prompt' => 'Пәнді таңдаңыз', 'id' => 'course-id']) ?>
 
             <?= $form->field($model, 'section_id')->widget(DepDrop::class, [
+                'data' => $model->getSectionForDepdrop(),
                 'options' => ['id' => 'section-id'],
                 'pluginOptions' => [
                     'depends' => ['course-id'],
@@ -36,7 +37,6 @@ use yii\widgets\ActiveForm;
                 'options' => [
                     'multiple' => false,
                     'id' => 'section_file',
-                    'accept' => 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 ],
                 'pluginOptions' => [
                     'required' => $model->file_name === null,
