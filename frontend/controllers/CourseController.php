@@ -71,9 +71,29 @@ class CourseController extends Controller
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionLessons(int $course_id)
+    public function actionQuarter(int $course_id)
     {
-        $lessons = Section::find()->byCourseId($course_id)->all();
+        $course = Course::find()->byId($course_id)->one();
+        $courses = Course::find()->all();
+        $info = Info::find()->where(['type' => Info::BASTY_BET])->one();
+        if (!$course) {
+            throw new NotFoundHttpException('Пән табылмады');
+        }
+        return $this->render('quarter', [
+            'course' => $course,
+            'courses' => $courses,
+            'info' => $info,
+        ]);
+    }
+
+    /**
+     * @param int $course_id
+     * @return mixed
+     * @throws NotFoundHttpException
+     */
+    public function actionLessons(int $course_id, int $quarter)
+    {
+        $lessons = Section::find()->byCourseId($course_id)->byQuarter($quarter)->all();
         $courses = Course::find()->all();
         $course = Course::find()->byId($course_id)->one();
         $info = Info::find()->where(['type' => Info::BASTY_BET])->one();

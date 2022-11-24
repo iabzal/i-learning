@@ -48,7 +48,7 @@ $this->title = 'Пәндер';
         <?php if (count($courses) > 0) { ?>
             <div class="feature-inner row">
                 <?php foreach ($courses as $course) { ?>
-                    <a href="/course/lessons?course_id=<?= $course->id ?>" class="col-lg-4 col-md-6">
+                    <a href="/course/quarter?course_id=<?= $course->id ?>" class="col-lg-4 col-md-6">
                         <div class="feature-item">
                             <i class="fa fa-book"></i>
                             <h4><?= $course->name ?></h4>

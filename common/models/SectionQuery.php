@@ -41,4 +41,9 @@ class SectionQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere(['id' => $id]);
     }
+
+    public function byQuarter(int $quarter)
+    {
+        return $this->andWhere(['quarter' => $quarter]);
+    }
 }

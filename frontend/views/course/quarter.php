@@ -1,12 +1,12 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $lessons \common\models\Section[] */
-/* @var $title string */
-/* @var $courses \common\models\Course[] */
+/* @var $course \common\models\Course */
 /* @var $info \common\models\Info */
+/* @var $courses \common\models\Course[] */
 
-$this->title = $title;
+$this->title = $course->name;
+$quarters = [1, 2, 3, 4];
 ?>
 
 
@@ -16,7 +16,7 @@ $this->title = $title;
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
                 <h1 class="text-white">
-                    <?= $title ?>
+                    <?= $course->name ?>
                 </h1>
                 <div class="link-nav">
 						<span class="box">
@@ -24,7 +24,7 @@ $this->title = $title;
 							<i class="lnr lnr-arrow-right"></i>
 							<a href="/course">Пәндер</a>
 							<i class="lnr lnr-arrow-right"></i>
-							<a href=""><?= $title ?></a>
+							<a href=""><?= $course->name ?></a>
 						</span>
                 </div>
             </div>
@@ -42,33 +42,24 @@ $this->title = $title;
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="section-title text-center" style="padding-bottom: 30px">
-                    <h1>Сабақтар</h1>
+                    <h1>Тоқсанды таңдаңыз</h1>
                 </div>
             </div>
         </div>
         <div class="row">
-            <?php if (count($lessons) > 0) {
-                foreach ($lessons as $lesson) {
-            ?>
-                <a href="/course/show-lesson?id=<?= $lesson->id ?>" class="col-lg-3 mb-4">
+            <?php foreach ($quarters as $quarter) {  ?>
+                <a href="/course/lessons?course_id=<?= $course->id ?>&quarter=<?=$quarter?>" class="col-lg-3 mb-4">
                     <div class="single-cat-widget">
                         <div class="content relative">
                             <div class="overlay overlay-bg"></div>
                             <div class="thumb" style="width: 100%; height: 10rem; background: #CCCCCC"></div>
                             <div class="content-details">
-                                <h6 class="content-title mx-auto text-uppercase"><?= $lesson->name ?></h6>
+                                <h3 class="content-title mx-auto text-uppercase text-white"><?= $quarter ?>-тоқсан</h3>
                                 <span></span>
                             </div>
                         </div>
                     </div>
                 </a>
-            <?php
-                }
-            } else { ?>
-                <div style="min-height: 20vh">
-                    <a href="javascript:history.back()"><i class="lnr lnr-arrow-left" style="font-weight: 600;"></i> Кері оралу</a><br>
-                    <h4>Таңдалған тоқсанда сабақтар табылмады...</h4>
-                </div>
             <?php } ?>
         </div>
     </div>
